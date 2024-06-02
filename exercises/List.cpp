@@ -10,6 +10,15 @@ public:
         value(v)
     {}
 
+    ~Node()
+    {
+        if (next)
+        {
+            delete next;
+        }
+        std::cout << "Destructor Node called" << std::endl;
+    }
+
     Node* next;
     int value;
 };
@@ -17,7 +26,16 @@ public:
 class List
 {
 public:
-    List();
+    List() : first(nullptr) {};
+    ~List()
+    {
+        if (first)
+        {
+            delete first;
+        }
+
+        std::cout << "Destructor List called" << std::endl;
+    }
     void add(Node* node);
     Node* get(const int value);
 
@@ -25,13 +43,9 @@ private:
     Node* first;
 };
 
-List::List() :
-    first(nullptr)
-{}
-
 void List::add(Node* node)
 {
-    if(!first)
+    if (!first)
     {
         first = node;
     }
@@ -48,7 +62,7 @@ void List::add(Node* node)
 
 Node* List::get(const int value)
 {
-    if(!first)
+    if (!first)
     {
         cout << "List is empty!" << endl;
         return nullptr;
@@ -58,7 +72,7 @@ Node* List::get(const int value)
         Node* current = first;
         do
         {
-            if(current->value == value)
+            if (current->value == value)
             {
                 cout << "Found value " << current->value << endl;
                 return current;
@@ -88,7 +102,7 @@ int main()
 
     if (node)
         cout << node->value << '\n';
-
+    
     return 0;
 }
 
